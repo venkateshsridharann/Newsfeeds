@@ -2,6 +2,7 @@ import os
 import sys 
 from datetime import datetime
 from selenium import webdriver
+from selenium.webdriver.firefox.options import Options
 
 sys.path.append(os.path.abspath("../labeling"))
 from ml_label import *
@@ -23,11 +24,18 @@ from globenewswire import *
 from PEprofessional import *
 from businessjournals import *
 
-sys.path.append(os.path.abspath("../boto"))
+sys.path.append(os.path.abspath("../boto3"))
 from download_from_aws import *
 from upload_to_aws import *
 
-driver = webdriver.Firefox(executable_path="geckodriver.exe")
+options = Options()
+options.headless = True
+
+# linux (after getting geckodriver place in main file)
+# driver = webdriver.Firefox(executable_path="./geckodriver.exe", options=options)
+
+# windows 
+driver = webdriver.Firefox(executable_path="./geckodriver.exe", options=options)
 
 today_date = str(datetime.now())[:10]
 data_set = set()
