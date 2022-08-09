@@ -1,7 +1,7 @@
 import os
 import boto3
-
-s3 = boto3.client('s3')
+import logging
+from botocore.exceptions import ClientError
 
 def upload_previous_to_aws(date):
     date = date[:-3]
@@ -72,7 +72,7 @@ def remove_from_local(date):
         os.remove('../tmp/bankruptcy_ipo_{}.csv'.format(date))
         print('bankruptcy_ipo_{}.csv'.format(date)+' File  removed\n')
     
-    
+ 
 
 def upload_to_s3(date):
     upload_database_to_aws(date)
@@ -80,7 +80,5 @@ def upload_to_s3(date):
     upload_bankruptcy_ipo_to_aws(date)
     upload_previous_to_aws(date)
     remove_from_local(date)
-    
-    
     
     
