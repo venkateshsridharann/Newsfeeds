@@ -5,11 +5,11 @@ from botocore.exceptions import ClientError
 
 date = str(datetime.now())[:10]
 year,month,day = date.split("-")
+weekday = datetime.now().isoweekday()
 
 from create_url import *
 
 def send_emails(email_ID): 
-
     url_dict = create_all_urls()
     dates = []
     links = []
@@ -30,22 +30,36 @@ def send_emails(email_ID):
                 )
                 
     # The HTML body of the email.
-    BODY_HTML = """<html>
-    <head></head>
-    <body>
-        <p>Hi Team,<br><br>
-        Here are the files for today. <br>
-            <a href='{}'>{}</a> <br>
-            <a href='{}'>{}</a> <br>
-            <a href='{}'>{}</a> <br>
-            <a href='{}'>{}</a> <br><br>
-            
-            Thanks,<br>
-            Venkatesh
-        </p>
-    </body>
-    </html>
-                """.format(links[0],dates[0],links[1],dates[1],links[2],dates[2],links[3],dates[3])            
+    
+    if weekday == 1:
+        BODY_HTML = """<html>
+        <head></head>
+        <body>
+            <p>Hi Team,<br><br>
+            Here are the files for today. <br>
+                <a href='{}'>{}</a> <br>
+                <a href='{}'>{}</a> <br>
+                <a href='{}'>{}</a> <br>
+                <a href='{}'>{}</a> <br><br>
+                Thanks,<br>
+                Venkatesh
+            </p>
+        </body>
+        </html>
+                    """.format(links[0],dates[0],links[1],dates[1],links[2],dates[2],links[3],dates[3])            
+    else:
+        BODY_HTML = """<html>
+        <head></head>
+        <body>
+            <p>Hi Team,<br><br>
+            Here are the files for today. <br>
+                <a href='{}'>{}</a> <br>
+                <a href='{}'>{}</a> <br><br>
+                Thanks,<br>
+                Venkatesh
+            </p>
+        </body>
+        </html>""".format(links[0],dates[0],links[1],dates[1])  
 
     # The character encoding for the email.
     CHARSET = "UTF-8"
@@ -90,7 +104,7 @@ def send_emails(email_ID):
         print("Email sent to {}".format(email_ID)),
 
 
-email_IDs = ['add_emails_here@example.com','add_emails_here2@example.com']
+email_IDs = ['sample_dummy@domain.com','sample_dummy2@domain.com']
 
 for email in email_IDs:
     send_emails(email)
