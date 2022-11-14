@@ -23,6 +23,7 @@ from businesswire import *
 from globenewswire import *
 from PEprofessional import *
 from businessjournals import *
+from themiddlemarket import *
 
 sys.path.append(os.path.abspath("../boto3"))
 from download_from_aws import *
@@ -103,6 +104,7 @@ main_pehub_new(driver,data_set,today_date,filename,database,batch)
         # ## main_benzinga(data_set,today_date,filename,database)
         # # if first_time_today == True:
 main_cb_news(driver,data_set,today_date,filename,database,batch)
+main_middlemarket(driver,data_set,today_date,filename,database,batch)
         # ## not working needs changes
         # ## main_fortune(driver,today_date,database)
         # ## peprofessonal changed
