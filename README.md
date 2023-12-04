@@ -1,3 +1,3 @@
 # newsfeeds
-This is a webscraper script that extracts news articles from various source feeds, uses ML to classify them and push to S3
+This is a financial newsfeed classifier script that extracts news articles from various source feeds, uses a classification Machine Learning algorithm to classify and push the dataset to an AWS S3 bucket.
 
